@@ -1,0 +1,10 @@
+---
+- hosts: all
+  user: vitalik-server
+  become: true
+  become_method: sudo
+  vars:
+    package_name: "{{ package_name }}"
+  tasks:
+    - include_role:
+        name: install_package
