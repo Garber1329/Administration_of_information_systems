@@ -1,0 +1,27 @@
+---
+- hosts: all
+  user: vitalik-server
+  become: true
+  become_method: sudo
+  vars:
+    package_name: "{{ package_name }}"
+  tasks:
+    - name: Install package
+      when: ansible_os_family == "Debian"
+      apt:
+        name: "{{ package_name }}"
+        state: present
+
+    - name: Install package
+      when: ansible_os_family == "RedHat"
+      yum:
+        name: "{{ package_name }}"
+        state: present
+# - hosts: all
+#   user: vitalik-server
+#   become: true
+#   become_method: sudo
+#   vars:
+#     package_name: "{{ package_name }}"
+#   roles:
+#     - install_package
